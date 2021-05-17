@@ -3,8 +3,12 @@ package cachalot
 import "context"
 
 type (
-	GetOptions struct{}
-	SetOptions struct{}
+	GetOptions struct {
+		Deserializer Deserializer
+	}
+	SetOptions struct {
+		Serializer Serializer
+	}
 	DelOptions struct{}
 )
 
@@ -14,12 +18,33 @@ type (
 	DelOption func(*DelOptions)
 )
 
+func SetDeserializer(d Deserializer) GetOption {
+	return func(o *GetOptions) {
+		o.Deserializer = d
+	}
+}
+
+func SetSerializer(s Serializer) SetOption {
+	return func(o *SetOptions) {
+		o.Serializer = s
+	}
+}
+
 type From int
 
 const (
 	NotFound From = iota
 	LocalCache
 	RemoteCache
+)
+
+type (
+	Deserializer interface {
+		Deserialize([]byte) (interface{}, error)
+	}
+	Serializer interface {
+		Serialize(interface{}) ([]byte, error)
+	}
 )
 
 // Local is used as local cache layer in MultiLayer
