@@ -59,6 +59,9 @@ type Remote interface {
 	Get(ctx context.Context, key string, o *GetOptions) (value []byte, found bool, err error)
 	Set(ctx context.Context, key string, value []byte, o *SetOptions) error
 	Del(ctx context.Context, key string, o *DelOptions) error
+
+	// InvalidatedKeys returns channel which sends key of invalidated cache
+	InvalidatedKeys() <-chan string
 }
 
 // MultiLayer is the interface you want
