@@ -8,10 +8,16 @@ import (
 type (
 	GetOptions struct {
 		Deserializer Deserializer
+
+		// Custom describes implementation specific options.
+		Custom interface{}
 	}
 	SetOptions struct {
 		Serializer Serializer
 		TTL        time.Duration
+
+		// Custom describes implementation specific options.
+		Custom interface{}
 	}
 	DelOptions struct{}
 )
