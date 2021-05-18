@@ -22,24 +22,6 @@ type (
 	DelOption func(*DelOptions)
 )
 
-func SetDeserializer(d Deserializer) GetOption {
-	return func(o *GetOptions) {
-		o.Deserializer = d
-	}
-}
-
-func SetSerializer(s Serializer) SetOption {
-	return func(o *SetOptions) {
-		o.Serializer = s
-	}
-}
-
-func SetTTL(ttl time.Duration) SetOption {
-	return func(o *SetOptions) {
-		o.TTL = ttl
-	}
-}
-
 type From int
 
 const (
