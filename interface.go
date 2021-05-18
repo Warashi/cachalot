@@ -62,8 +62,8 @@ type Remote interface {
 	InvalidatedKeys() <-chan string
 }
 
-// MultiLayer is the interface you want
-type MultiLayer interface {
+// MultiLevel is the interface you want
+type MultiLevel interface {
 	Get(ctx context.Context, key string, o ...GetOption) (value interface{}, from From, err error)
 	Set(ctx context.Context, key string, o ...SetOption) error
 	Del(ctx context.Context, key string, o ...DelOption) error
