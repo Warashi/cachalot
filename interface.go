@@ -1,6 +1,9 @@
 package cachalot
 
-import "context"
+import (
+	"context"
+	"time"
+)
 
 type (
 	GetOptions struct {
@@ -8,6 +11,7 @@ type (
 	}
 	SetOptions struct {
 		Serializer Serializer
+		TTL        time.Duration
 	}
 	DelOptions struct{}
 )
@@ -27,6 +31,12 @@ func SetDeserializer(d Deserializer) GetOption {
 func SetSerializer(s Serializer) SetOption {
 	return func(o *SetOptions) {
 		o.Serializer = s
+	}
+}
+
+func SetTTL(ttl time.Duration) SetOption {
+	return func(o *SetOptions) {
+		o.TTL = ttl
 	}
 }
 
