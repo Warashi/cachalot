@@ -7,9 +7,3 @@ func Deserializer(d cachalot.Deserializer) cachalot.GetOption {
 		o.Deserializer = d
 	}
 }
-
-func Custom(opts interface{}) cachalot.GetOption {
-	return func(o *cachalot.GetOptions) {
-		o.Custom = opts
-	}
-}

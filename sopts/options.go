@@ -17,9 +17,3 @@ func TTL(ttl time.Duration) cachalot.SetOption {
 		o.TTL = ttl
 	}
 }
-
-func Custom(opts interface{}) cachalot.SetOption {
-	return func(o *cachalot.SetOptions) {
-		o.Custom = opts
-	}
-}
