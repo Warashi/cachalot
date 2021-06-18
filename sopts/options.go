@@ -8,12 +8,18 @@ import (
 
 func Serializer(s cachalot.Serializer) cachalot.SetOption {
 	return func(o *cachalot.SetOptions) {
-		o.Serializer = s
+		o.Remote.Serializer = s
 	}
 }
 
 func TTL(ttl time.Duration) cachalot.SetOption {
 	return func(o *cachalot.SetOptions) {
 		o.TTL = ttl
+	}
+}
+
+func Cost(c int) cachalot.SetOption {
+	return func(o *cachalot.SetOptions) {
+		o.Local.Cost = c
 	}
 }

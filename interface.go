@@ -7,11 +7,19 @@ import (
 
 type (
 	GetOptions struct {
-		Deserializer Deserializer
+		Local  struct{}
+		Remote struct {
+			Deserializer Deserializer
+		}
 	}
 	SetOptions struct {
-		Serializer Serializer
-		TTL        time.Duration
+		Local struct {
+			Cost int
+		}
+		Remote struct {
+			Serializer Serializer
+		}
+		TTL time.Duration
 	}
 	DelOptions struct{}
 )
