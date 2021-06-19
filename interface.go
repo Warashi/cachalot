@@ -16,7 +16,7 @@ type (
 	}
 
 	LocalSetOptions struct {
-		Cost int
+		Cost int64
 		TTL  time.Duration
 	}
 	RemoteSetOptions struct {
@@ -27,7 +27,13 @@ type (
 		Local  LocalSetOptions
 		Remote RemoteSetOptions
 	}
-	DelOptions struct{}
+
+	LocalDelOptions  struct{}
+	RemoteDelOptions struct{}
+	DelOptions       struct {
+		Local  LocalDelOptions
+		Remote RemoteDelOptions
+	}
 )
 
 type (
@@ -55,16 +61,16 @@ type (
 
 // Local is used as local cache layer in MultiLayer
 type Local interface {
-	Get(ctx context.Context, key string, o *GetOptions) (value interface{}, found bool, err error)
+	Get(ctx context.Context, key string, o *LocalGetOptions) (value interface{}, found bool, err error)
 	Set(ctx context.Context, key string, value interface{}, o *LocalSetOptions) error
-	Del(ctx context.Context, key string, o *DelOptions) error
+	Del(ctx context.Context, key string, o *LocalDelOptions) error
 }
 
 // Remote is used as remote cache layer in MultiLayer
 type Remote interface {
-	Get(ctx context.Context, key string, o *GetOptions) (value []byte, found bool, err error)
+	Get(ctx context.Context, key string, o *LocalGetOptions) (value []byte, found bool, err error)
 	Set(ctx context.Context, key string, value interface{}, o *RemoteSetOptions) error
-	Del(ctx context.Context, key string, o *DelOptions) error
+	Del(ctx context.Context, key string, o *LocalDelOptions) error
 
 	// InvalidatedKeys returns channel which sends key of invalidated cache
 	InvalidatedKeys() <-chan []string
