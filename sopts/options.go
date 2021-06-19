@@ -14,7 +14,8 @@ func Serializer(s cachalot.Serializer) cachalot.SetOption {
 
 func TTL(ttl time.Duration) cachalot.SetOption {
 	return func(o *cachalot.SetOptions) {
-		o.TTL = ttl
+		o.Local.TTL = ttl
+		o.Remote.TTL = ttl
 	}
 }
 
